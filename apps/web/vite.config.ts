@@ -11,6 +11,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  preview: {
+    allowedHosts: ["industrious-rejoicing-production-579f.up.railway.app"],
+  },
   server: {
     proxy: {
       "/api": {
