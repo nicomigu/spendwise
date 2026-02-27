@@ -23,7 +23,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TenantInterceptor());
 
   app.enableCors({
-    origin: ['http://localhost:5173'],
+    origin: (origin, callback) => {
+      const allowedOrigins = ['http://localhost:5173', process.env.WEB_URL];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   });
 
